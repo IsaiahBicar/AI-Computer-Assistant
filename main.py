@@ -11,6 +11,10 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id) # 0 = male , 1 = female
 activationWord = 'computer' # Single word
 
+#choose your browser
+#set the path to chrome Windows version 
+chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+webbrowser.register('chrome',None,webbrowser.BackgroundBrowser(chrome_path))
 #Alert user to an exception via speech()
 
 def speak(text,rate = 120):
@@ -43,6 +47,20 @@ def parseCommand():
     
     return query
 
+#Method to search for wikipedia
+def search_wiki(query = ''):
+    searchResults = wikipedia.search(query)
+    if not searchResults: # not in array of resutls
+        print('No results could be found')
+        return 'No result received'
+    try:
+        wikipage = wikipedia.page(searchResults[0])
+    except wikipage.Disambiguationerror as error:
+        wikiPage = wikipedia.page(error.options[0])
+    print(wikiPage.title)
+    wikiSum = str(wikiPage.summary)
+    return wikiSum
+
 # Main Loop
 if __name__ == '__main__':
     speak('All systems nominal.')
@@ -63,3 +81,14 @@ if __name__ == '__main__':
                     query.pop(0) # Remove Say
                     speech = ' '.join(query)
                     speak(speech)
+                    
+            # Navigate to a website
+            if query[0] == 'go' and query[1] == 'to':
+                speak('Opening...')
+                query = ' '.join(query[2:])
+                webbrowser.get('chrome').open_new(query)
+                
+            #Using wikipedia
+            if query[0] == 'Wikipedia':
+                query = ' '.join(query[1:])
+                speak('Checking the database.' )
