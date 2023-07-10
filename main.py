@@ -92,3 +92,17 @@ if __name__ == '__main__':
             if query[0] == 'Wikipedia':
                 query = ' '.join(query[1:])
                 speak('Checking the database.' )
+                speak(search_wiki(query))
+            
+            #Log Book for the lol's
+            if query[0] == 'log':
+                speak('Ready to record you note')
+                newNote = parseCommand().lower()
+                now = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+                with open('note_%s.txt' %now,w) as newFile:
+                    newFile.write(newNote)
+                speak('Note written')
+                
+            if query[0] == 'exit':
+                speak('Goodbye')
+                break
