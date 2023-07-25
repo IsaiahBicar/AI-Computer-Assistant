@@ -101,6 +101,12 @@ You can customize the assistant by modifying the code:
 
 - The assistant's functionality is limited to the provided commands. It does not have advanced natural language understanding capabilities like commercial voice assistants (e.g., Siri, Alexa).
 
+## Future Implementations
+
+-Add the ability for the voice assistant to do some math
+
+-Integrate ChatGPT onto the system to allow smooth Talking.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
